@@ -96,6 +96,7 @@ public class FullscreenActivity extends AppCompatActivity {
         WebSettings webSettings = myweb.getSettings();
         webSettings.setJavaScriptEnabled(true);
         myweb.loadUrl("http://pursepacker.herokuapp.com");
+        myweb.setWebViewClient(new WebViewClient());
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
@@ -114,6 +115,15 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (myweb.canGoBack()) {
+            myweb.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
